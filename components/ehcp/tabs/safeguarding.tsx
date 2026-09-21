@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { CheckCircle2, ShieldAlert, ShieldCheck } from 'lucide-react'
 import type { CaseData, SafeguardingAction, SafeguardingAlert } from '@/lib/ehcp/types'
 import { Card, KeyValue, Pill, SectionTitle } from '@/components/ui'
+import { useProfessional } from '@/lib/professional/context'
 
 export function SafeguardingTab({ data }: { data: CaseData }) {
   return (
@@ -29,15 +30,17 @@ export function SafeguardingTab({ data }: { data: CaseData }) {
 }
 
 function SafeguardingCard({ alert }: { alert: SafeguardingAlert }) {
+  const { professional } = useProfessional()
+  const org = professional?.organisation ?? ''
   const [actions, setActions] = useState<SafeguardingAction[]>(alert.actions)
   const [acknowledged, setAcknowledged] = useState(alert.acknowledged)
   const [status, setStatus] = useState(alert.status)
   const [completedBy, setCompletedBy] = useState(alert.completedBy)
 
-  const [ackName, setAckName] = useState('')
-  const [ackRole, setAckRole] = useState('')
-  const [compName, setCompName] = useState('')
-  const [compRole, setCompRole] = useState('')
+  const [ackName, setAckName] = useState(professional?.name ?? '')
+  const [ackRole, setAckRole] = useState(professional?.role ?? '')
+  const [compName, setCompName] = useState(professional?.name ?? '')
+  const [compRole, setCompRole] = useState(professional?.role ?? '')
 
   const now = () =>
     new Date().toLocaleString('en-GB', {
@@ -54,17 +57,25 @@ function SafeguardingCard({ alert }: { alert: SafeguardingAlert }) {
     setStatus('in-progress')
     setActions((prev) => [
       ...prev,
-      { timestamp: now(), action: 'Alert acknowledged by authorised person', by: `${ackName} (${ackRole})` },
+      {
+        timestamp: now(),
+        action: 'Alert acknowledged by authorised person',
+        by: `${ackName} (${ackRole}${org ? `, ${org}` : ''})`,
+      },
     ])
   }
 
   const complete = () => {
     if (!compName.trim() || !compRole.trim()) return
     setStatus('completed')
-    setCompletedBy(`${compName} (${compRole})`)
+    setCompletedBy(`${compName} (${compRole}${org ? `, ${org}` : ''})`)
     setActions((prev) => [
       ...prev,
-      { timestamp: now(), action: 'Safeguarding action recorded as completed', by: `${compName} (${compRole})` },
+      {
+        timestamp: now(),
+        action: 'Safeguarding action recorded as completed',
+        by: `${compName} (${compRole}${org ? `, ${org}` : ''})`,
+      },
     ])
   }
 

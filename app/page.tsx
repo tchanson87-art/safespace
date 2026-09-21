@@ -1,5 +1,5 @@
-import { Dashboard } from '@/components/ehcp/dashboard'
+import { AppRoot } from '@/components/professional/app-root'
 
 export default function Page() {
-  return <Dashboard />
+  return <AppRoot />
 }

@@ -6,12 +6,25 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'sw
 const manrope = Manrope({ subsets: ['latin'], variable: '--font-manrope', display: 'swap' })
 
 export const metadata: Metadata = {
-  title: 'NeuroPathway — EHCP Evidence & Assurance Engine',
+  metadataBase: new URL('https://ehcpcollection.org'),
+  title: {
+    default: 'NeuroPathway — EHCP Evidence & Assurance Engine',
+    template: '%s · NeuroPathway',
+  },
   description:
     'Evidence gathering, quality assurance, delivery and outcomes validation for Education, Health and Care Plans. Prevention is the cure.',
   applicationName: 'NeuroPathway',
   manifest: '/manifest.json',
   robots: { index: false, follow: false },
+  openGraph: {
+    title: 'NeuroPathway — EHCP Evidence & Assurance Engine',
+    description:
+      'Evidence gathering, quality assurance, delivery and outcomes validation for Education, Health and Care Plans.',
+    url: 'https://ehcpcollection.org',
+    siteName: 'NeuroPathway',
+    locale: 'en_GB',
+    type: 'website',
+  },
 }
 
 export const viewport: Viewport = {
