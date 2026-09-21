@@ -1,0 +1,96 @@
+@import 'tailwindcss';
+
+@theme inline {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-soft: var(--primary-soft);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent-soft: var(--accent-soft);
+
+  --color-rag-green: var(--rag-green);
+  --color-rag-green-soft: var(--rag-green-soft);
+  --color-rag-amber: var(--rag-amber);
+  --color-rag-amber-soft: var(--rag-amber-soft);
+  --color-rag-red: var(--rag-red);
+  --color-rag-red-soft: var(--rag-red-soft);
+  --color-rag-grey: var(--rag-grey);
+  --color-rag-grey-soft: var(--rag-grey-soft);
+
+  --radius-card: var(--radius);
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #10243e;
+
+  --card: #ffffff;
+  --card-foreground: #10243e;
+
+  --muted: #f1f5f9;
+  --muted-foreground: #5a6b82;
+
+  --border: #dbe4ee;
+  --input: #dbe4ee;
+  --ring: #1e6fd9;
+
+  /* NeuroPathway blue */
+  --primary: #1e6fd9;
+  --primary-foreground: #ffffff;
+  --primary-soft: #e8f1fd;
+
+  /* NeuroPathway teal */
+  --accent: #0d9488;
+  --accent-foreground: #ffffff;
+  --accent-soft: #e0f4f1;
+
+  /* Accessible RAG indicators */
+  --rag-green: #1f8a4c;
+  --rag-green-soft: #e4f4ea;
+  --rag-amber: #b26a00;
+  --rag-amber-soft: #fbefd8;
+  --rag-red: #c02626;
+  --rag-red-soft: #fbe4e4;
+  --rag-grey: #64748b;
+  --rag-grey-soft: #eef2f6;
+
+  --radius: 0.9rem;
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    line-height: 1.55;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+  }
+  /* Keep 16px min on inputs to avoid iOS zoom */
+  input, textarea, select {
+    font-size: 16px;
+  }
+}

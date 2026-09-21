@@ -1,0 +1,17 @@
+{
+  "name": "NeuroPathway — EHCP Evidence & Assurance Engine",
+  "short_name": "NeuroPathway",
+  "description": "Evidence gathering, quality assurance and outcomes validation for EHCPs.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1e6fd9",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
