@@ -21,14 +21,18 @@ export function SignIn() {
   return (
     <div className="flex min-h-screen flex-col bg-background">
       <div className="mx-auto flex w-full max-w-md flex-1 flex-col justify-center px-4 py-10">
-        <div className="mb-6 flex items-center gap-3">
-          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-primary text-primary-foreground">
-            <span className="font-display text-xl font-extrabold">N</span>
-          </div>
-          <div>
-            <p className="font-display text-lg font-bold leading-tight text-foreground">NeuroPathway</p>
-            <p className="text-xs text-muted-foreground">ehcpcollection.org</p>
-          </div>
+        <div className="mb-6 flex flex-col items-center text-center">
+          <img
+            src="/social-innovation-cic-logo.jpeg"
+            alt="Social Innovation CIC — NeuroPathway Safe Space and MediSense"
+            className="h-40 w-40 rounded-full object-contain"
+          />
+          <p className="mt-3 font-display text-lg font-bold leading-tight text-foreground">
+            NeuroPathway
+          </p>
+          <p className="text-xs text-muted-foreground">
+            Social Innovation CIC · ehcpcollection.org
+          </p>
         </div>
 
         <h1 className="text-balance font-display text-2xl font-bold text-foreground">

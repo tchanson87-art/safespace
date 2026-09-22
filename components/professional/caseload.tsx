@@ -22,9 +22,11 @@ export function Caseload({ onOpen }: { onOpen: (reference: string) => void }) {
     <div className="min-h-screen bg-background">
       <header className="sticky top-0 z-30 border-b border-border bg-background/95 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center gap-3 px-4 py-3">
-          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground">
-            <span className="font-display text-lg font-extrabold">N</span>
-          </div>
+          <img
+            src="/social-innovation-cic-logo.jpeg"
+            alt="Social Innovation CIC"
+            className="h-9 w-9 shrink-0 rounded-full object-contain"
+          />
           <div className="min-w-0 flex-1">
             <p className="truncate font-display text-sm font-bold leading-tight text-foreground">
               NeuroPathway

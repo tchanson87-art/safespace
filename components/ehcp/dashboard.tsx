@@ -81,9 +81,11 @@ export function Dashboard({ onBack }: { onBack?: () => void }) {
               <ArrowLeft className="h-4 w-4" />
             </button>
           ) : (
-            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground">
-              <span className="font-display text-lg font-extrabold">N</span>
-            </div>
+            <img
+              src="/social-innovation-cic-logo.jpeg"
+              alt="Social Innovation CIC"
+              className="h-9 w-9 shrink-0 rounded-full object-contain"
+            />
           )}
           <div className="min-w-0 flex-1">
             <p className="truncate font-display text-sm font-bold leading-tight text-foreground">
