@@ -3,6 +3,7 @@
 import { BadgeCheck, Bot, FileDown, History, ShieldQuestion, UserCheck } from 'lucide-react'
 import type { CaseData, CriticalFlag, Rag } from '@/lib/ehcp/types'
 import { Card, ExpandablePanel, KeyValue, Pill, SectionTitle } from '@/components/ui'
+import { useProfessional } from '@/lib/professional/context'
 
 const REPORTS = [
   { id: 1, name: 'EHCP Evidence Summary', body: 'A structured summary of all supplied evidence, grouped by need and clearly labelled by type and reliability.' },
@@ -28,6 +29,8 @@ export function ReportsTab({
   readiness: { band: string; rag: Rag; score: number; capped: boolean }
   flags: CriticalFlag[]
 }) {
+  const { attribution } = useProfessional()
+
   const contributors = Array.from(
     new Set(data.evidence.map((e) => `${e.contributorRole}`)),
   ).join(', ')
@@ -86,7 +89,14 @@ export function ReportsTab({
                   label="AI involvement"
                   value="Pattern support and draft wording only, clearly labelled."
                 />
-                <KeyValue label="Human reviewer" value="SENCO (awaiting sign-off on amendments)" />
+                <KeyValue
+                  label="Human reviewer"
+                  value={
+                    attribution
+                      ? `${attribution} — pending sign-off`
+                      : 'Awaiting human reviewer sign-off'
+                  }
+                />
                 <KeyValue label="Version" value="v1.0" />
               </dl>
             </div>

@@ -3,12 +3,14 @@
 import { useMemo, useState } from 'react'
 import {
   AlertTriangle,
+  ArrowLeft,
   ClipboardCheck,
   FileText,
   GitBranch,
   HeartPulse,
   LayoutDashboard,
   ListChecks,
+  LogOut,
   MessageSquareHeart,
   ScrollText,
   ShieldAlert,
@@ -18,6 +20,7 @@ import {
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { sampleCase } from '@/lib/ehcp/data'
+import { useProfessional } from '@/lib/professional/context'
 import {
   computeCriticalFlags,
   computeMetrics,
@@ -54,8 +57,9 @@ const TABS = [
 
 type TabId = (typeof TABS)[number]['id']
 
-export function Dashboard() {
+export function Dashboard({ onBack }: { onBack?: () => void }) {
   const [tab, setTab] = useState<TabId>('overview')
+  const { professional, signOut } = useProfessional()
 
   const metrics = useMemo(() => computeMetrics(sampleCase), [])
   const flags = useMemo(() => computeCriticalFlags(sampleCase), [])
@@ -67,20 +71,44 @@ export function Dashboard() {
     <div className="min-h-screen bg-background">
       <header className="sticky top-0 z-30 border-b border-border bg-background/95 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center gap-3 px-4 py-3">
-          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground">
-            <span className="font-display text-lg font-extrabold">N</span>
-          </div>
+          {onBack ? (
+            <button
+              type="button"
+              onClick={onBack}
+              aria-label="Back to caseload"
+              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-border text-muted-foreground hover:bg-muted"
+            >
+              <ArrowLeft className="h-4 w-4" />
+            </button>
+          ) : (
+            <img
+              src="/social-innovation-cic-logo.jpeg"
+              alt="Social Innovation CIC"
+              className="h-9 w-9 shrink-0 rounded-full object-contain"
+            />
+          )}
           <div className="min-w-0 flex-1">
             <p className="truncate font-display text-sm font-bold leading-tight text-foreground">
-              NeuroPathway
+              {sampleCase.reference} · {sampleCase.yearGroup}
             </p>
             <p className="truncate text-xs text-muted-foreground">
               EHCP Evidence &amp; Assurance Engine
             </p>
           </div>
-          <span className="hidden shrink-0 rounded-full bg-accent-soft px-2.5 py-1 text-xs font-semibold text-accent sm:inline">
-            Prevention is the cure
-          </span>
+          {professional ? (
+            <button
+              type="button"
+              onClick={signOut}
+              className="inline-flex min-h-11 shrink-0 items-center gap-1.5 rounded-full border border-border px-3 text-xs font-semibold text-muted-foreground hover:bg-muted"
+            >
+              <LogOut className="h-4 w-4" />
+              <span className="hidden sm:inline">Sign out</span>
+            </button>
+          ) : (
+            <span className="hidden shrink-0 rounded-full bg-accent-soft px-2.5 py-1 text-xs font-semibold text-accent sm:inline">
+              Prevention is the cure
+            </span>
+          )}
         </div>
 
         <nav aria-label="Assurance sections" className="border-t border-border">
@@ -135,6 +163,15 @@ export function Dashboard() {
             professionals.
           </p>
         </div>
+
+        {professional ? (
+          <p className="mb-3 text-xs text-muted-foreground">
+            Working as{' '}
+            <span className="font-semibold text-foreground">{professional.name}</span> —{' '}
+            {professional.role}, {professional.organisation}. Your identity is attached to every
+            acknowledgement, approval and audit entry you record.
+          </p>
+        ) : null}
 
         {/* Always-visible critical flags — never concealed by the overall score */}
         <CriticalFlagsBanner flags={flags} onOpenSafeguarding={goSafeguarding} />
